@@ -7,7 +7,7 @@
   ],
   "repository": "https://github.com/meedi/session-montpellier",
   "success_url": "/",
-  "addons": ["heroku-postgresql:hobby-dev", "papertrail"],
+  "addons": ["heroku-postgresql:hobby-dev"],
   "env": {
     "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-multi",
     "NPM_CONFIG_PRODUCTION": "false",
