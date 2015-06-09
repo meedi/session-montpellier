@@ -5,6 +5,8 @@ name := "session-montpellier"
 
 version := "1.0"
 
+resolvers := ("Atlassian Releases" at "https://maven.atlassian.com/public/") +: resolvers.value
+
 libraryDependencies ++= Seq(
   "com.mohiva" %% "play-silhouette" % "2.0",
   "org.webjars" %% "webjars-play" % "2.3.0",
