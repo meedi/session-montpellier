@@ -1,23 +1,32 @@
+<script type="text/ng-template" id="modal-post-session.html">
+    <form>
+        <div class="form-group">
+          <label>Titre</label>
+          <input type="text" ng-model="session.title" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea ng-model="session.description" class="form-control"></textarea>
+        </div>
+        <button type="button" class="btn btn-primary btn-lg" ng-click="save()">Ajouter</button>
+    </form>
+</script>
+
 <header class="main-header">
-      <div class="topbar">
-      <div class="main-title">Session Montpellier</div>
-      </div>
-      <div class="search">
-        <div class="search-input">
-          <div class="input-group input-group-lg">
-              <span class="input-group-addon" id="sizing-addon1"></span>
-              <input type="text" class="form-control" placeholder="Rechercher une session" aria-describedby="sizing-addon1">
-          </div>
+      <div class="topbar" ng-controller="TopBarCtrl">
+        <div class="main-title">Session Montpellier</div>
+        <div class="topbar-add-session-button">
+            <a href="#"  ng-click="open()">ajouter une session</a>
+            | {{ me.fullName }}
         </div>
       </div>
-  </header>
-  <section class="page">
-      <section class="menu-left-container">
-        <div ui-view="menu-left"></div>
-      </section>
-      <section class="content">
-        <a ui-sref="signin">home</a>
-        <div ui-view="main-content"></div>
-      </section>
-  </section>
-</div>
+      <div ui-view="header"></div>
+</header>
+<section class="page">
+    <section class="menu-left-container" controller="MenuLeftCtrl">
+      <div ui-view="menu-left"></div>
+    </section>
+    <section class="content">
+      <div ui-view="main-content"></div>
+    </section>
+</section>

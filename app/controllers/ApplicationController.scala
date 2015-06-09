@@ -30,6 +30,8 @@ class ApplicationController @Inject() (implicit val env: Environment[User, JWTAu
       case "home" => Ok(views.html.home.render())
       case "signin" => Ok(views.html.signin.render())
       case "layout" => Ok(views.html.layout.render())
+      case "menuleft" => Ok(views.html.menuleft.render())
+      case "session" => Ok(views.html.session.render())
       case _ => NotFound
     }
 

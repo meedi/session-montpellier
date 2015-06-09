@@ -1,6 +1,28 @@
 <section class="signin" ng-controller="SignInCtrl">
-<h1>Bienvenue sur Session Montpellier</h1>
+    <div ng-hide="loginSuccessFull">
+        <h1>Bienvenue sur Session Montpellier</h1>
 
-<button ng-click="auth()">Se connecter via Facebook</button>
-<p>Pour accéder à session montpellier, vous devez vous connecter à votre compte Facebook</p>
+        <button ng-click="auth()">Se connecter via Facebook</button>
+        <p>Pour accéder à session montpellier, vous devez vous connecter à votre compte Facebook</p>
+    </div>
+    <div ng-show="loginSuccessFull">
+        <h2>Bonjour {{ user.firstName + ' ' + user.lastName }}</h2>
+        <div class="avatar">
+            <img src="{{user.avatarURL}}" />
+        </div>
+
+        <div class="description">
+            Une session est un groupe de discussion, un canal de diffusion, et un moyen de se connecter avec les personnes proches de vous qui partagent vos centres d'intérêt.
+            Session Montpellier est un réseau social qui rapproche.<br><br>
+            Bonne exploration des sessions à Montpellier !
+            <nav>
+                <ul>
+                    <li> <a ui-sref="home.create"> > Créer une session</a></li>
+                    <li> <a ui-sref="home"> > Explorer les sessions</a></li>
+                </ul>
+            </nav>
+        </div>
+        <
+    </div>
+
 </section>

@@ -1,6 +1,12 @@
-Sessions:
-<ul>
-	<li ng-repeat="s in sessions">
-	{{s.title}}
-	</li>
-</ul>
+
+<section class="home-sessions">
+	<h3>Les dernières sessions à Montpellier: </h3>
+	<article class="session" ng-repeat="s in sessions">
+		<div class="well">{{ s.description}}</div>
+		<h3>{{s.title}} | <a ui-sref="session({sessionId: s.sessionID})">Voir</a> | <a href="#" ng-click="subscribe(s.sessionID)">S'abonner</a></h3>
+		<div class="session-infos">			
+			<span class="session-author"><em>par</em> <author>Mehdi</author></span>
+			<span class="creation-date">{{s.creationDate| date:"'le' dd/MM/yyyy 'à' h:mm"}}</span>
+		</div>
+	</article>
+</section>

@@ -6,13 +6,23 @@
 var app = angular.module('session-mtp', [
   'ngResource',
   'ui.router',
-  'satellizer'
+  'satellizer',
+  'ui.bootstrap'
 ]);
 
-app.run(function($rootScope, $state) {
+app.run(['$rootScope', '$state', '$stateParams', 'userService',
+    function($rootScope, $state, $stateParams, userService) {
+      $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
+        $rootScope.toState = toState;
+        $rootScope.toStateParams = toStateParams;
+        if (userService.isIdentityResolved()) {
+          console.log("Authorize ..");
+          userService.authorize();
 
-  $rootScope.user = {};
-});
+        } 
+      });
+    }
+  ]);
 
 
 app.config(function ($urlRouterProvider, $stateProvider, $httpProvider, $authProvider) {
@@ -20,30 +30,92 @@ app.config(function ($urlRouterProvider, $stateProvider, $httpProvider, $authPro
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
-    .state('root', {
-    	url: '/',
+    .state('site', {
+      'abstract': true,
+      resolve: {
+        authorize: ['userService',
+          function(userService) {
+            console.log("authorization..")
+            return userService.authorize();
+          }
+        ]
+      }
+    })
+    .state('main', {
+      'abstract': true,
+      parent: 'site',
+      data: {
+        requiresLogin : true,
+        roles: []
+      },
+      views: {
+        'root@': {
+          templateUrl: 'views/layout.html'
+        },
+        'menu-left@main': {
+          controller: 'MenuLeftCtrl',
+          templateUrl: 'views/menuleft.html'
+        }
+      }
+    })
+    .state('home', {
+      parent: 'main',
+    	url: '/home',
     	views: {
-    		'root@': {
-    			templateUrl: 'views/layout.html'
-    		}
-    	},
+        'main-content@main': {
+          templateUrl: 'views/home.html',
+          controller: 'HomeCtrl'
+        },
 
+        'header@main': {
+          templateUrl: 'search.html'
+        }
+
+    	},
         resolve: {
         	sessions: ['SessionsFactory', function(SessionsFactory) {
-        		return SessionsFactory.getSessions();
+        		console.log("getSessions");
+            return SessionsFactory.all();
         	}]
         }
     })
     .state('signin', {
+      parent: 'site',
     	url: '/signin',
+      data: {
+        requiresLogin: false,
+        roles: []
+      },
     	views: {
     		'root@': {
     			templateUrl: 'views/signin.html'
     		}
     	}
     })
+    .state('session', {
+      parent: 'main',
+      url: '/session/{sessionId}',
+      resolve: {
+        session: function($stateParams, SessionsFactory) {
+          return SessionsFactory.get($stateParams.sessionId);
+        }
+      },
+      views: {
+        'header@main' : {
+          template: function() {
+            console.log('test');
+            return "<div class=\"session-title\"><h1>{{session.title}}</h1><p>{{session.description}}</p></div>";
+          },
+          controller: function($scope, session) {
+            $scope.session = session.data;
+          }
+        },
+        'main-content@main' : {
+          templateUrl: "views/session.html"
+        }
+      }
+    })
     ;
-  //Verifie si l'utilisateur est loggue, le renvoie sur la page signin le cas echeant
   $httpProvider.interceptors.push(function($q, $injector) {
     return {
       request: function(request) {
@@ -57,7 +129,7 @@ app.config(function ($urlRouterProvider, $stateProvider, $httpProvider, $authPro
 
       responseError: function(rejection) {
         if (rejection.status === 401) {
-          $injector.get('$state').go('signIn');
+          $injector.get('$state').go('signin');
         }
         return $q.reject(rejection);
       }

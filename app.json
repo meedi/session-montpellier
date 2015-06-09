@@ -1,0 +1,18 @@
+{
+  "name": "session-montpellier",
+  "keywords": [
+    "Play",
+    "Silhouette",
+    "Angular"
+  ],
+  "repository": "https://github.com/meedi/session-montpellier",
+  "success_url": "/",
+  "env": {
+    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-multi",
+    "NPM_CONFIG_PRODUCTION": "false",
+    "PLAY_CONF_FILE": "application.prod.conf",
+    "PLAY_APP_SECRET": "changeme",
+    "FACEBOOK_CLIENT_ID": "",
+    "FACEBOOK_CLIENT_SECRET": ""
+  }
+}

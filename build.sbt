@@ -13,7 +13,9 @@ libraryDependencies ++= Seq(
   "net.codingwell" %% "scala-guice" % "4.0.0-beta4",
   "com.typesafe.play" %% "play-slick" % "0.8.0",
   "org.postgresql" % "postgresql" % "9.3-1102-jdbc4",
-  cache
+  "com.github.tminglei" %% "slick-pg" % "0.8.5",
+  cache,
+  ws
 )
 
 Yeoman.yeomanSettings

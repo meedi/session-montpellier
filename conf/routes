@@ -3,11 +3,16 @@
 # ~~~~
 
 # Home page
-GET        /                                com.tuplejump.playYeoman.Yeoman.index
+GET         /                                com.tuplejump.playYeoman.Yeoman.index
+GET         /api/sessions                    @controllers.SessionController.all(page: Option[Int])
+GET         /api/sessions/search             @controllers.SessionController.search(query: String, page: Option[Int])
+GET         /api/sessions/:id                @controllers.SessionController.get(id: String)
+POST		/api/sessions/:id/subscribes 	 @controllers.SessionController.subscribe(id: String)
+POST        /api/sessions                    @controllers.SessionController.save()
 
-GET        /api/user                            @controllers.ApplicationController.user
-
-GET        /api/signout                     @controllers.ApplicationController.signOut
+GET         /api/user                        @controllers.ApplicationController.user
+GET 		/api/user/sessions				 @controllers.SessionController.allSubscribedSessions(page: Option[Int])
+GET         /api/signout                     @controllers.ApplicationController.signOut
 POST        /api/authenticate                @controllers.SocialAuthController.authenticate
 
 
@@ -15,7 +20,7 @@ POST        /api/authenticate                @controllers.SocialAuthController.a
 GET         /views/$template<.+>.html        @controllers.ApplicationController.view(template)
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file                    controllers.Assets.at(path="/public", file)
+GET         /assets/*file                    controllers.Assets.at(path="/public", file)
+GET         /public/uploads/*file            controllers.Assets.at(path="/public/uploads", file)
 
-
-->         /                                yeoman.Routes
+->          /                                yeoman.Routes

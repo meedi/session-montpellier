@@ -1,11 +1,14 @@
 package models.daos.slick
 
-import play.api.db.slick.Config.driver.simple._
-
+import utils.MyPostgresDriver.simple._
+import play.api.libs.json.Json
+import java.util.UUID
 object DBAuthTableDefinitions {
 
+  implicit val dbuserJsonFormat = Json.format[DBUser]
+
   case class DBUser (
-    userID: String,
+    userID: UUID,
     firstName: Option[String],
     lastName: Option[String],
     fullName: Option[String],
@@ -14,7 +17,7 @@ object DBAuthTableDefinitions {
   )
 
   class Users(tag: Tag) extends Table[DBUser](tag, "user") {
-    def id = column[String]("userID", O.PrimaryKey)
+    def id = column[UUID]("userID", O.PrimaryKey)
     def firstName = column[Option[String]]("firstName")
     def lastName = column[Option[String]]("lastName")
     def fullName = column[Option[String]]("fullName")
@@ -37,12 +40,12 @@ object DBAuthTableDefinitions {
   }
 
   case class DBUserLoginInfo (
-    userID: String,
+    userID: UUID,
     loginInfoId: Long
   )
 
   class UserLoginInfos(tag: Tag) extends Table[DBUserLoginInfo](tag, "userlogininfo") {
-    def userID = column[String]("userID", O.NotNull)
+    def userID = column[UUID]("userID", O.NotNull)
     def loginInfoId = column[Long]("loginInfoId", O.NotNull)
     def * = (userID, loginInfoId) <> (DBUserLoginInfo.tupled, DBUserLoginInfo.unapply)
   }

@@ -40,7 +40,7 @@ class SilhouetteModule extends AbstractModule with ScalaModule {
     bind[UserService].to[UserServiceImpl]
     bind[UserDAO].to[UserDAOSlick]
     bind[DelegableAuthInfoDAO[OAuth2Info]].to[OAuth2InfoDAOSlick]
-
+    
     bind[CacheLayer].to[PlayCacheLayer]
     bind[HTTPLayer].to[PlayHTTPLayer]
     bind[OAuth2StateProvider].to[DummyStateProvider]

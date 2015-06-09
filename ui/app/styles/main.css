@@ -6748,6 +6748,9 @@ button.close {
     display: none !important;
   }
 }
+.main-header {
+  margin-bottom: 5px;
+}
 .main-header .topbar {
   background-color: #f7f7f7;
   height: 25px;
@@ -6771,32 +6774,48 @@ button.close {
 }
 @media (min-width: 1200px) {
   .main-header .topbar .main-title {
-    left: 12.5%;
+    left: 6.25%;
+  }
+}
+.main-header .topbar .topbar-add-session-button {
+  text-align: right;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 1200px) {
+  .main-header .topbar .topbar-add-session-button {
+    float: left;
+    width: 31.25%;
+  }
+}
+@media (min-width: 1200px) {
+  .main-header .topbar .topbar-add-session-button {
+    left: 37.5%;
   }
 }
 .main-header .search {
   margin-left: -15px;
   margin-right: -15px;
-  text-align: center;
   padding-top: 40px;
   padding-bottom: 40px;
 }
-.main-header .search .search-input {
+.main-header .search .search-container {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
-  width: 70%;
 }
 @media (min-width: 1200px) {
-  .main-header .search .search-input {
+  .main-header .search .search-container {
     float: left;
-    width: 75%;
+    width: 62.5%;
   }
 }
 @media (min-width: 1200px) {
-  .main-header .search .search-input {
-    left: 12.5%;
+  .main-header .search .search-container {
+    left: 18.75%;
   }
 }
 .page {
@@ -6817,6 +6836,11 @@ button.close {
     width: 12.5%;
   }
 }
+@media (min-width: 1200px) {
+  .menu-left-container {
+    left: 6.25%;
+  }
+}
 .content {
   position: relative;
   min-height: 1px;
@@ -6826,7 +6850,12 @@ button.close {
 @media (min-width: 1200px) {
   .content {
     float: left;
-    width: 62.5%;
+    width: 68.75%;
+  }
+}
+@media (min-width: 1200px) {
+  .content {
+    left: 6.25%;
   }
 }
 .signin {
@@ -6951,4 +6980,46 @@ fieldset[disabled] .signin button.active {
 }
 body {
   background: url('../img/mtp.gif') fixed;
+}
+.home-sessions .session {
+  padding: 15px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+  margin-bottom: 20px;
+}
+.home-sessions .session h3 {
+  font-size: 20px;
+  margin: 0;
+}
+.home-sessions .session .session-infos {
+  color: #777777;
+  font-size: 12px;
+  text-align: right;
+}
+.user-infos {
+  margin-top: 20px;
+  text-align: center;
+}
+.user-infos img {
+  width: 80px;
+  height: 80px;
+}
+.user-infos:after {
+  content: "";
+  display: block;
+  width: 80%;
+  margin: auto;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.session-title {
+  text-align: center;
+}
+.session-title h1 {
+  color: white;
+}
+.session-title p {
+  color: #eeeeee;
 }

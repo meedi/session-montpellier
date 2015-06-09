@@ -13,9 +13,10 @@ case class User(
                  lastName: Option[String],
                  fullName: Option[String],
                  email: Option[String],
-                 avatarURL: Option[String]) extends Identity
+                 avatarURL: Option[String]
+                 ) extends Identity
 
 object User {
 
-  implicit val jsonFormat = Json.format[User]
+  implicit val userJsonFormat = Json.format[User]
 }

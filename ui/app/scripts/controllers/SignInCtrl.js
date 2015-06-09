@@ -2,14 +2,18 @@
 
 /*global app: false */
 
-app.controller('SignInCtrl', ['$scope', '$auth', function($scope, $auth) {
+app.controller('SignInCtrl', ['$scope', '$state', 'userService', 'SessionsFactory', function($scope, $state, userService, SessionsFactory) {
+  $scope.user;
+  $scope.loginSuccessFull= false;
+
   $scope.auth = function() {
-    $auth.authenticate("facebook")
-      .then(function(response) {
-          alert("Bonjour " + response.data.firstName);
-      })
-      .catch(function(response) {
-        console.log(response);
+    userService.loginWithFacebook().then(
+      function(user) {
+          $scope.loginSuccessFull = true
+          $scope.user = user
+          console.log("going home");
+          $state.go("home");
       });
   }
+
 }]);
