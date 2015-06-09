@@ -1,0 +1,1 @@
++web: target/universal/stage/bin/session-montpellier -Dhttp.port=${PORT} -Dconfig.resource=${PLAY_CONF_FILE}
